@@ -3,11 +3,13 @@ var score = 0;
 var hasConflicted = new Array();
 var winOnce = false;
 
-$(document).ready(function(){
+$().ready(function(){
+
 	registerTouch();
 	prepareForMobile();
 	newgame();
 	hideDialog();
+
 });
 
 function registerTouch(){
