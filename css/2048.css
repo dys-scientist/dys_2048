@@ -105,3 +105,13 @@ header #newgame:hover{
 	padding:10px 20px;
 	border-radius:10px;
 }
+
+#shell{
+    position: absolute;
+    top: 0;
+    left: 0;
+	opacity:0.1;
+    height: 100%;
+    width: 100%;
+    z-index: 99999;
+}

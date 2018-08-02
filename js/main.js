@@ -2,13 +2,78 @@ var board = new Array();
 var score = 0;
 var hasConflicted = new Array();
 var winOnce = false;
+
 $(document).ready(function(){
-	//加载调用的方法
+	registerTouch();
 	prepareForMobile();
 	newgame();
 	hideDialog();
 });
 
+function registerTouch(){
+
+	$('#shell').on('touchstart',function(event){
+		startx = event.originalEvent.touches[0].pageX;
+		starty = event.originalEvent.touches[0].pageY;
+	});
+
+	$('#shell').on('touchmove',function(event){
+		// event.preventDefault();
+		// 判断默认行为是否可以被禁用
+		if (event.cancelable) {
+			// 判断默认行为是否已经被禁用
+			if (!event.defaultPrevented) {
+				event.preventDefault();
+			}
+		}
+	});
+
+	$('#shell').on('touchend',function(event){
+		endx = event.originalEvent.changedTouches[0].pageX;
+		endy = event.originalEvent.changedTouches[0].pageY;
+		
+		var deltax = endx - startx;
+		var deltay = endy - starty;
+		
+		if(Math.abs(deltax) <0.2*documentWidth&& Math.abs(deltay)<0.2*documentWidth){
+			return;
+		}
+		
+		if(Math.abs(deltax) >= Math.abs(deltay)){
+			if(deltax > 0){
+				//向右
+				if(moveRight()){
+						setTimeout("generateOneNumber()",210);
+						setTimeout("isGameover()",300);
+						setTimeout("isWin()",300);
+					}
+			}else{
+				//向左
+				if(moveLeft()){
+						setTimeout("generateOneNumber()",210);
+						setTimeout("isGameover()",300);
+						setTimeout("isWin()",300);
+					}
+			}
+		}else{
+			if(deltay > 0){
+				//向下
+				if(moveDown()){
+						setTimeout("generateOneNumber()",210);
+						setTimeout("isGameover()",300);
+						setTimeout("isWin()",300);
+					}
+			}else{
+				//向上
+				if(moveUp()){
+						setTimeout("generateOneNumber()",210);
+						setTimeout("isGameover()",300);
+						setTimeout("isWin()",300);
+					}
+			}
+		}
+	});
+}
 function hideDialog(){
 	$(".dialog-success").css("display","none");
 	$(".dialog-fail").css("display","none");
@@ -170,68 +235,6 @@ $(document).keydown(function (event) {
     default:
       return; 
   }
-});
-
-document.addEventListener('touchstart',function(event){
-	startx = event.touches[0].pageX;
-	starty = event.touches[0].pageY;
-});
-
-document.addEventListener('touchmove',function(event){
-	// event.preventDefault();
-	// 判断默认行为是否可以被禁用
-	if (event.cancelable) {
-		// 判断默认行为是否已经被禁用
-		if (!event.defaultPrevented) {
-			event.preventDefault();
-		}
-	}
-});
-
-document.addEventListener('touchend',function(event){
-	endx = event.changedTouches[0].pageX;
-	endy = event.changedTouches[0].pageY;
-	
-	var deltax = endx - startx;
-	var deltay = endy - starty;
-	
-	if(Math.abs(deltax) <0.2*documentWidth&& Math.abs(deltay)<0.2*documentWidth){
-		return;
-	}
-	
-	if(Math.abs(deltax) >= Math.abs(deltay)){
-		if(deltax > 0){
-			//向右
-			if(moveRight()){
-					setTimeout("generateOneNumber()",210);
-					setTimeout("isGameover()",300);
-					setTimeout("isWin()",300);
-				}
-		}else{
-			//向左
-			if(moveLeft()){
-					setTimeout("generateOneNumber()",210);
-					setTimeout("isGameover()",300);
-					setTimeout("isWin()",300);
-				}
-		}
-	}else{
-		if(deltay > 0){
-			//向下
-			if(moveDown()){
-					setTimeout("generateOneNumber()",210);
-					setTimeout("isGameover()",300);
-					setTimeout("isWin()",300);
-				}
-		}else{
-			//向上
-			if(moveUp()){
-					setTimeout("generateOneNumber()",210);
-					setTimeout("isGameover()",300);
-					setTimeout("isWin()",300);
-				}
-		}
-	}
 });
 
 function isGameover(){
