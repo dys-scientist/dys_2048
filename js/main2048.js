@@ -15,7 +15,6 @@ function hideDialog(){
 }
 
 function prepareForMobile(){
-	console.log(isMobile())
 	if(isPC()){
 		gridContainerWidth = 500;
 		cellSpace = 20;
@@ -196,7 +195,14 @@ document.addEventListener('touchstart',function(event){
 });
 
 document.addEventListener('touchmove',function(event){
-	event.preventDefault();
+	// event.preventDefault();
+	// 判断默认行为是否可以被禁用
+	if (event.cancelable) {
+		// 判断默认行为是否已经被禁用
+		if (!event.defaultPrevented) {
+			event.preventDefault();
+		}
+	}
 });
 
 document.addEventListener('touchend',function(event){
