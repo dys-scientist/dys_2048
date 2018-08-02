@@ -15,21 +15,40 @@ function hideDialog(){
 }
 
 function prepareForMobile(){
+	console.log(isMobile())
 	if(isPC()){
 		gridContainerWidth = 500;
 		cellSpace = 20;
 		cellSideLength = 100;
+		$("#grid-container").css('width',gridContainerWidth);
+		$("#grid-container").css('height',gridContainerWidth);
+		$("#grid-container").css('padding',cellSpace);
+		$("#grid-container").css('border-radius',0.02*gridContainerWidth);
+		if(documentHeight*3/documentWidth>5){
+			$('header').css('margin-top',cellSideLength);
+		}
+		$(".grid-cell").css("width",cellSideLength);
+		$(".grid-cell").css("height",cellSideLength);
+		$(".grid-cell").css("border-radius",0.02*cellSideLength);
+	} 
+	if (isMobile()) {
+		console.log(window.devicePixelRatio)
+		// $('body').css('transform', 'scale(' + 1 / window.devicePixelRatio + ')')
+		gridContainerWidth = 375;
+		cellSpace = 12;
+		cellSideLength = 75;
+		// $("#grid-container").css('width', gridContainerWidth);
+		$("#grid-container").css('width', '100%');
+		$("#grid-container").css('height', gridContainerWidth);
+		$("#grid-container").css('padding', cellSpace);
+		$("#grid-container").css('border-radius', 0.02 * gridContainerWidth);
+		if (documentHeight * 3 / documentWidth > 5) {
+			$('header').css('margin-top', cellSideLength);
+		}
+		$(".grid-cell").css("width", cellSideLength);
+		$(".grid-cell").css("height", cellSideLength);
+		$(".grid-cell").css("border-radius", 0.02 * cellSideLength);
 	}
-	$("#grid-container").css('width',gridContainerWidth-2*cellSpace);
-	$("#grid-container").css('height',gridContainerWidth-2*cellSpace);
-	$("#grid-container").css('padding',cellSpace);
-	$("#grid-container").css('border-radius',0.02*gridContainerWidth);
-	if(documentHeight*3/documentWidth>5){
-		$('header').css('margin-top',cellSideLength);
-	}
-	$(".grid-cell").css("width",cellSideLength);
-	$(".grid-cell").css("height",cellSideLength);
-	$(".grid-cell").css("border-radius",0.02*cellSideLength);
 }
 
 function newgame(){

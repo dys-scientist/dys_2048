@@ -45,7 +45,8 @@ function isPC() {
         xll : false
     };
     //检测平台
-    var p = navigator.platform;
+		var p = navigator.platform;
+		console.log(p)
     system.win = p.indexOf("Win") == 0;
     system.mac = p.indexOf("Mac") == 0;
     system.x11 = (p == "X11") || (p.indexOf("Linux") == 0);
