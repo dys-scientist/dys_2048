@@ -29,7 +29,7 @@ header h2{
 header #newgame{
 	text-decoration:none;
 	color:white;
-	background-color:#C5B883;
+	background-color:#51bbbb;
 	padding:10px 20px;
 	border-radius:10px;
 	z-index: 100000;
@@ -70,42 +70,48 @@ header #newgame:hover{
 }
 .dialog-success{
     position: absolute;
-	width: 100%;
+    width: 100%;
+    height: 100%;
     left: 0;
-	background: none repeat scroll 0% 0% rgba(221, 211, 194, 1);
-	line-height:50px;
-	border-radius: 15px;
-	text-align:center;
+    top: 0;
+    background: none repeat scroll 0% 0% rgb(0, 0, 0, 0.9);
+    line-height: 50px;
+    text-align: center;
 }
 .dialog-fail{
 	position: absolute;
-	width: 100%;
+    width: 100%;
+    height: 100%;
     left: 0;
-	background: none repeat scroll 0% 0% rgba(221, 211, 194, 1);
-	line-height:50px;
-	border-radius: 15px;
-	text-align:center;
+    top: 0;
+    background: none repeat scroll 0% 0% rgb(0, 0, 0, 0.9);
+    line-height: 50px;
+    text-align: center;
 }
 
 .success{
+	    margin-top: 50%;
 	font-size:21px;	
+	color:white;
 	font-family:Microsoft Yahei;
 }
 .fail{
+	margin-top: 50%;
+	color:white;
 	font-size:21px;	
 	font-family:Microsoft Yahei;
 }
 #newgame{
 	text-decoration:none;
 	color:white;
-	background-color:#C5B883;
+	background-color:#51bbbb;
 	padding:10px 20px;
 	border-radius:10px;
 }
 #continue{
 	text-decoration:none;
 	color:white;
-	background-color:#C5B883;
+	background-color:#51bbbb;
 	padding:10px 20px;
 	border-radius:10px;
 }
