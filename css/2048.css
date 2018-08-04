@@ -74,7 +74,7 @@ header #newgame:hover{
     height: 100%;
     left: 0;
     top: 0;
-    background: none repeat scroll 0% 0% rgb(0, 0, 0, 0.9);
+    background: rgba(0, 0, 0, 0.9);
     line-height: 50px;
     text-align: center;
 }
@@ -84,7 +84,7 @@ header #newgame:hover{
     height: 100%;
     left: 0;
     top: 0;
-    background: none repeat scroll 0% 0% rgb(0, 0, 0, 0.9);
+    background: rgba(0, 0, 0, 0.9);
     line-height: 50px;
     text-align: center;
 }
