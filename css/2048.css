@@ -65,7 +65,6 @@ header #newgame:hover{
 	padding:20px;
 	margin:auto auto;
 	width:160px;
-	height:150px;
 	background: none repeat scroll 0% 0% rgba(221, 211, 194, 1);
 	line-height:50px;
 	border-radius: 15px;
@@ -75,7 +74,6 @@ header #newgame:hover{
 	padding:20px;
 	margin:auto auto;
 	width:160px;
-	height:120px;
 	background: none repeat scroll 0% 0% rgba(221, 211, 194, 1);
 	line-height:50px;
 	border-radius: 15px;
