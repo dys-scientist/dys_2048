@@ -35,13 +35,15 @@ header #newgame{
 header #newgame:hover{
 	background-color:#B4A569;
 }
-
+#score{
+	color:red;
+}
 #grid-container{
 	z-index: 0;
 	position: absolute;
 	background-color:#bbada0;
 	border-radius:10px;	
-    top: 60%;
+    top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
 }

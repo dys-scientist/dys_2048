@@ -122,7 +122,7 @@ function prepareForMobile(){
 	$("#grid-container").css('padding',cellSpace);
 	$("#grid-container").css('border-radius',0.02*gridContainerWidth);
 	$("#grid-container").css('transform','translate(-50%, -50%) scale('+1.0+')');
-	
+
 
 	$(".grid-cell").css("width",cellSideLength);
 	$(".grid-cell").css("height",cellSideLength);
