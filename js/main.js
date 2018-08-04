@@ -17,7 +17,7 @@ $().ready(function(){
 
 
 	// 计时开始
-	starTimer();
+	// starTimer();
 });
 
 function registerTouch(){
@@ -111,6 +111,10 @@ function prepareForMobile(){
 }
 
 function newgame(){
+	// 先清除已有计时器
+	endTimer()
+	// 开始计时
+	starTimer()
 	//初始化棋盘
 	init();
 	//随机生成两个数字
@@ -118,10 +122,12 @@ function newgame(){
 	generateOneNumber();
 	updateBoardView();
 	resetSocre();
+
 }
 
 // 计时开始
 function starTimer() {
+	t = 0 
 	timer = setInterval(() => {
 		t++;
 		renderTime();
@@ -146,7 +152,7 @@ function starTimer() {
 
 // 计时结束
 function endTimer(params) {
-	clearInterval(timer)
+	timer && clearInterval(timer)
 }
 
 function again(){
@@ -154,8 +160,7 @@ function again(){
 	hideDialog();
 	resetSocre();
 
-	endTimer();
-	starTimer();
+	// starTimer();
 }
 
 function conti(){
