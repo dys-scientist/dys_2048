@@ -5,6 +5,7 @@
 header{
 	display:block;
 	margin:0 auto;
+	margin-top:80px;
 	width:100%;
 	text-align:center;
 }
@@ -12,15 +13,17 @@ header{
 body{
 	font-family:Arial,Microsoft Yahei;
 	background-color: rgba(240, 240, 210, 0.6);
+	background-size: cover;
+	background-image:url(../img/bg.jpg);
 }
 
 header h1{
 	font-family:Arial;
+	color:white;
 }
 
-header p{
-	font-weight:bold;
-	font-size:22px;
+header h2{
+	color:white;
 }
 
 header #newgame{
@@ -36,14 +39,15 @@ header #newgame:hover{
 	background-color:#B4A569;
 }
 #score{
+	font-weight:bold;
 	color:red;
 }
 #grid-container{
 	z-index: 0;
 	position: absolute;
-	background-color:#bbada0;
+	background-color:#ffffff;
 	border-radius:10px;	
-    top: 50%;
+    top: 380px;
     left: 50%;
     transform: translate(-50%, -50%);
 }
@@ -52,7 +56,7 @@ header #newgame:hover{
 	width:100px;
 	height:100px;
 	border-radius:6px;
-	background-color:#ccc0b3;
+	background-color:#ffc6d7;
 	position:absolute;
 }
 .number-cell{
