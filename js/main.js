@@ -79,6 +79,7 @@ function registerTouch(){
 function hideDialog(){
 	$(".dialog-success").css("display","none");
 	$(".dialog-fail").css("display","none");
+	$("#shell").css("display","block");
 }
 
 function prepareForMobile(){
@@ -163,7 +164,7 @@ function updateBoardView(){
 				numberCell.css("background-color",getNumberCellBgColor(board[i][j]));
 				numberCell.css("color",getNumberCellFontColor(board[i][j]));
 				numberCell.css("font-size",getNumberCellFontSize(board[i][j]));
-				numberCell.css("background-image","url(/img/"+board[i][j]+".png)");
+				numberCell.css("background-image","url(http://demo.infinitysia.com/dys/2048/img/"+board[i][j]+".png)");
 				//numberCell.text(board[i][j]);
 			}
 			
@@ -261,10 +262,12 @@ function isWin(){
 
 function win(){
 	$(".dialog-success").css("display","block");
+	$("#shell").css("display","none");
 }
 
 function gameover(){
 	$(".dialog-fail").css("display","block");
+	$("#shell").css("display","none");
 }
 
 function moveUp(){
@@ -413,7 +416,7 @@ function showNumberWithAnimation(randomX,randomY,randomNumber){
 	numberCell.css("background-color",getNumberCellBgColor(board[randomX][randomY]));
 	numberCell.css("color",getNumberCellFontColor(board[randomX][randomY]));
 	numberCell.css("font-size",getNumberCellFontSize(randomNumber));
-	numberCell.css("background-image","url(/img/"+randomNumber+".png)");
+	numberCell.css("background-image","url(http://demo.infinitysia.com/dys/2048/img/"+randomNumber+".png)");
 	//numberCell.text(randomNumber);
 	
 	//animate函数第一个参数是CSS样式，第二个参数是时间
