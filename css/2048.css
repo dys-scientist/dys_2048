@@ -40,7 +40,7 @@ header #newgame:hover{
 	position: absolute;
 	background-color:#bbada0;
 	border-radius:10px;	
-    top: 55%;
+    top: 70%;
     left: 50%;
     transform: translate(-50%, -50%);
 }
