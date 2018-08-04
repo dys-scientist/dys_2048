@@ -6,55 +6,54 @@
 	<meta name="viewport" content="width=device-width,user-scalable=no,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0"/>
 	<link rel = "stylesheet" type = "text/css" href = "css/2048.css">
 	<script type = "text/javascript" src = "js/jquery.min.js"></script>
+	<script type = "text/javascript" src = "js/preloadjs-0.6.2.min.js"></script>
+	<script type = "text/javascript" src = "js/soundjs.min.js"></script>
 	<script type = "text/javascript" src = "js/main.js"></script>
+	<script async src="https://www.googletagmanager.com/gtag/js?id=UA-88161170-2"></script>
+
 </head>
 <body>
 	<header>
-		<h1>2048</h1>
-		<a href ="javascript:newgame()" id = "newgame">新游戏</a>
+		<h1>2048卤蛋合成记</h1>
 		<p>分数:<span id = "score">0</span></p>
 	</header>
-	<div id = "container">
-		<div id = "grid-container">
-			<div class = "grid-cell" id = "grid-cell-0-0"></div>
-			<div class = "grid-cell" id = "grid-cell-0-1"></div>
-			<div class = "grid-cell" id = "grid-cell-0-2"></div>
-			<div class = "grid-cell" id = "grid-cell-0-3"></div>
-			
-			<div class = "grid-cell" id = "grid-cell-1-0"></div>
-			<div class = "grid-cell" id = "grid-cell-1-1"></div>
-			<div class = "grid-cell" id = "grid-cell-1-2"></div>
-			<div class = "grid-cell" id = "grid-cell-1-3"></div>
-			
-			<div class = "grid-cell" id = "grid-cell-2-0"></div>
-			<div class = "grid-cell" id = "grid-cell-2-1"></div>
-			<div class = "grid-cell" id = "grid-cell-2-2"></div>
-			<div class = "grid-cell" id = "grid-cell-2-3"></div>
-			
-			<div class = "grid-cell" id = "grid-cell-3-0"></div>
-			<div class = "grid-cell" id = "grid-cell-3-1"></div>
-			<div class = "grid-cell" id = "grid-cell-3-2"></div>
-			<div class = "grid-cell" id = "grid-cell-3-3"></div>
-			<div class = "dialog-success">
-				<div class = "success">2048成了，刷波狂</div>
-				<div><a href ="javascript:again()" id = "newgame">重新开始</a></div>
-				<div><a href ="javascript:conti()" id = "continue">继续挑战</a></div>
-			</div>
-			<div class = "dialog-fail">
-				<div class = "fail">抱歉，弟弟</div>
-				<div><a href ="javascript:again()" id = "newgame">重新开始</a></div>
-			</div>
-		</div>
+	<div id = "grid-container">
+		<div class = "grid-cell" id = "grid-cell-0-0"></div>
+		<div class = "grid-cell" id = "grid-cell-0-1"></div>
+		<div class = "grid-cell" id = "grid-cell-0-2"></div>
+		<div class = "grid-cell" id = "grid-cell-0-3"></div>
+		
+		<div class = "grid-cell" id = "grid-cell-1-0"></div>
+		<div class = "grid-cell" id = "grid-cell-1-1"></div>
+		<div class = "grid-cell" id = "grid-cell-1-2"></div>
+		<div class = "grid-cell" id = "grid-cell-1-3"></div>
+		
+		<div class = "grid-cell" id = "grid-cell-2-0"></div>
+		<div class = "grid-cell" id = "grid-cell-2-1"></div>
+		<div class = "grid-cell" id = "grid-cell-2-2"></div>
+		<div class = "grid-cell" id = "grid-cell-2-3"></div>
+		
+		<div class = "grid-cell" id = "grid-cell-3-0"></div>
+		<div class = "grid-cell" id = "grid-cell-3-1"></div>
+		<div class = "grid-cell" id = "grid-cell-3-2"></div>
+		<div class = "grid-cell" id = "grid-cell-3-3"></div>
+	</div>
+	<div class = "dialog-success">
+		<div class = "success">Nice！成了，刷波狂！</div>
+		<img src="img/win.png" width=100%/>
+		<div><a href ="javascript:again()" id = "newgame">重新开始</a></div>
+	</div>
+	<div class = "dialog-fail">
+		<div class = "fail">尬住了，弟弟，送你一句：</div>
+		<img src="img/lose.png" width=100%/>
+		<div><a href ="javascript:again()" id = "newgame">重新开始</a></div>
 	</div>
 	<div id = "shell"></div>
 </body>
 </html>
 <script>
-(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
-
-ga('create', 'UA-88161170-1', 'auto');
-ga('send', 'pageview');
+window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments)};
+gtag('js', new Date());
+gtag('config', 'UA-88161170-2');
 </script>

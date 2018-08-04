@@ -2,6 +2,10 @@ var board = new Array();
 var score = 0;
 var hasConflicted = new Array();
 var winOnce = false;
+var loader = new createjs.LoadQueue(true);
+var soundReady = false;
+var soundFirstPlay = true;
+var sounds = {lose:null,lose:null,win:null};
 
 $().ready(function(){
 
@@ -9,12 +13,34 @@ $().ready(function(){
 	prepareForMobile();
 	newgame();
 	hideDialog();
-
+	
+	loader.installPlugin(createjs.Sound);
+	loader.loadFile({ src: 'assets/lose.mp3', id: 'lose', type:createjs.AbstractLoader.SOUND });
+	loader.loadFile({ src: 'assets/move.mp3', id: 'move', type:createjs.AbstractLoader.SOUND });
+	loader.loadFile({ src: 'assets/win.mp3', id: 'win', type:createjs.AbstractLoader.SOUND });
+	loader.addEventListener( 'complete', onLoadComplete );
+	
+	
 });
+
+function onLoadComplete(){
+	soundReady = true;
+}
+
+function playSound(id){
+	if(soundReady){ 
+		if(!sounds[id]) sounds[id] = createjs.Sound.play(id);
+		else sounds[id].play();
+	}
+}
 
 function registerTouch(){
 
 	$('#shell').on('touchstart',function(event){
+		if(soundFirstPlay){
+			playSound('move');
+			soundFirstPlay=false;
+		}
 		startx = event.originalEvent.touches[0].pageX;
 		starty = event.originalEvent.touches[0].pageY;
 	});
@@ -45,6 +71,7 @@ function registerTouch(){
 			if(deltax > 0){
 				//向右
 				if(moveRight()){
+						playSound('move');
 						setTimeout("generateOneNumber()",210);
 						setTimeout("isGameover()",300);
 						setTimeout("isWin()",300);
@@ -52,6 +79,7 @@ function registerTouch(){
 			}else{
 				//向左
 				if(moveLeft()){
+						playSound('move');
 						setTimeout("generateOneNumber()",210);
 						setTimeout("isGameover()",300);
 						setTimeout("isWin()",300);
@@ -61,6 +89,7 @@ function registerTouch(){
 			if(deltay > 0){
 				//向下
 				if(moveDown()){
+						playSound('move');
 						setTimeout("generateOneNumber()",210);
 						setTimeout("isGameover()",300);
 						setTimeout("isWin()",300);
@@ -68,6 +97,7 @@ function registerTouch(){
 			}else{
 				//向上
 				if(moveUp()){
+						playSound('move');
 						setTimeout("generateOneNumber()",210);
 						setTimeout("isGameover()",300);
 						setTimeout("isWin()",300);
@@ -92,6 +122,7 @@ function prepareForMobile(){
 	$("#grid-container").css('padding',cellSpace);
 	$("#grid-container").css('border-radius',0.02*gridContainerWidth);
 	$("#grid-container").css('transform','translate(-50%, -50%) scale('+1.0+')');
+	
 
 	$(".grid-cell").css("width",cellSideLength);
 	$(".grid-cell").css("height",cellSideLength);
@@ -107,6 +138,7 @@ function newgame(){
 	generateOneNumber();
 	updateBoardView();
 	resetSocre();
+	
 }
 
 function again(){
@@ -164,7 +196,7 @@ function updateBoardView(){
 				numberCell.css("background-color",getNumberCellBgColor(board[i][j]));
 				numberCell.css("color",getNumberCellFontColor(board[i][j]));
 				numberCell.css("font-size",getNumberCellFontSize(board[i][j]));
-				numberCell.css("background-image","url(http://demo.infinitysia.com/dys/2048/img/"+board[i][j]+".png)");
+				numberCell.css("background-image","url(./img/"+board[i][j]+".png)");
 				//numberCell.text(board[i][j]);
 			}
 			
@@ -263,11 +295,15 @@ function isWin(){
 function win(){
 	$(".dialog-success").css("display","block");
 	$("#shell").css("display","none");
+	
+	playSound('win');
 }
 
 function gameover(){
 	$(".dialog-fail").css("display","block");
 	$("#shell").css("display","none");
+	
+	playSound('lose');
 }
 
 function moveUp(){
@@ -302,6 +338,7 @@ function moveUp(){
 		}
 	}
 	setTimeout("updateBoardView()",200);
+
 	return true;
 }
 
@@ -337,6 +374,7 @@ function moveDown(){
 		}
 	}
 	setTimeout("updateBoardView()",200);
+
 	return true;
 }
 
@@ -372,6 +410,7 @@ function moveRight(){
 		}
 	}
 	setTimeout("updateBoardView()",200);
+
 	return true;
 }
 
@@ -407,6 +446,7 @@ function moveLeft(){
 		}
 	}
 	setTimeout("updateBoardView()",200);
+
 	return true;
 }
 
@@ -416,7 +456,7 @@ function showNumberWithAnimation(randomX,randomY,randomNumber){
 	numberCell.css("background-color",getNumberCellBgColor(board[randomX][randomY]));
 	numberCell.css("color",getNumberCellFontColor(board[randomX][randomY]));
 	numberCell.css("font-size",getNumberCellFontSize(randomNumber));
-	numberCell.css("background-image","url(http://demo.infinitysia.com/dys/2048/img/"+randomNumber+".png)");
+	numberCell.css("background-image","url(./img/"+randomNumber+".png)");
 	//numberCell.text(randomNumber);
 	
 	//animate函数第一个参数是CSS样式，第二个参数是时间
