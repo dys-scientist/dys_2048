@@ -15,8 +15,8 @@ $().ready(function(){
 function registerTouch(){
 
 	$('#shell').on('touchstart',function(event){
-		startx = event.originalEvent.touches[0].pageX;
-		starty = event.originalEvent.touches[0].pageY;
+		startx = event.touches[0].pageX;
+		starty = event.touches[0].pageY;
 	});
 
 	$('#shell').on('touchmove',function(event){
@@ -31,8 +31,8 @@ function registerTouch(){
 	});
 
 	$('#shell').on('touchend',function(event){
-		endx = event.originalEvent.changedTouches[0].pageX;
-		endy = event.originalEvent.changedTouches[0].pageY;
+		endx = event.changedTouches[0].pageX;
+		endy = event.changedTouches[0].pageY;
 		
 		var deltax = endx - startx;
 		var deltay = endy - starty;
