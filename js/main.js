@@ -3,6 +3,11 @@ var score = 0;
 var hasConflicted = new Array();
 var winOnce = false;
 
+// 计时器
+var timer;
+// 时间
+var t = 0;
+
 $().ready(function(){
 
 	registerTouch();
@@ -10,6 +15,9 @@ $().ready(function(){
 	newgame();
 	hideDialog();
 
+
+	// 计时开始
+	starTimer();
 });
 
 function registerTouch(){
@@ -109,14 +117,48 @@ function newgame(){
 	resetSocre();
 }
 
+// 计时开始
+function starTimer() {
+	timer = setInterval(() => {
+		t++;
+		renderTime();
+	}, 1000)
+	function renderTime() {
+		var str = ''
+		
+		if (t < 60 ) {
+			str = '00:' + (t > 9 ? t : '0' + t)
+		} else if (t >= 60 && t < 60 * 60) {
+			var min = Math.floor(t / 60) > 9 ? Math.floor(t / 60) : '0' + Math.floor(t / 60)
+			var sec = t % 60 > 9 ? t % 60 : '0' + t % 60
+			str = min + ':' + sec
+		} else if(t > 60 * 60){
+			str = '真的大便'
+			clearInterval(timer)
+		}
+
+		$('#time').text(str)
+	}
+}
+
+// 计时结束
+function endTimer(params) {
+	clearInterval(timer)
+}
+
 function again(){
 	newgame();
 	hideDialog();
 	resetSocre();
+
+	endTimer();
+	starTimer();
 }
 
 function conti(){
 	hideDialog();
+
+	endTimer()
 }
 
 function init(){
@@ -263,11 +305,15 @@ function isWin(){
 function win(){
 	$(".dialog-success").css("display","block");
 	$("#shell").css("display","none");
+
+	endTimer()
 }
 
 function gameover(){
 	$(".dialog-fail").css("display","block");
 	$("#shell").css("display","none");
+
+	endTimer()
 }
 
 function moveUp(){
