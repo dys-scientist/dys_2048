@@ -5,12 +5,13 @@
 	<title>德云色2048</title>
 	<meta name="viewport" content="width=device-width,user-scalable=no,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0"/>
 	<link rel = "stylesheet" type = "text/css" href = "css/2048.css">
-	<script type = "text/javascript" src = "js/jquery.min.js"></script>
+	<script src="https://cdn.bootcss.com/zepto/1.0rc1/zepto.min.js"></script>
+	<!-- <script type = "text/javascript" src = "js/jquery.min.js"></script> -->
 	<script type = "text/javascript" src = "js/main.js"></script>
 </head>
 <body>
 	<header>
-		<h1>2048</h1>
+		<h1>2048之卤蛋合成记</h1>
 		<a href ="javascript:newgame()" id = "newgame">新游戏</a>
 		<p>分数:<span id = "score">0</span></p>
 	</header>
@@ -41,7 +42,7 @@
 				<div><a href ="javascript:conti()" id = "continue">继续挑战</a></div>
 			</div>
 			<div class = "dialog-fail">
-				<div class = "fail">抱歉，弟弟</div>
+				<div class = "fail">这把被天克，没办法</div>
 				<div><a href ="javascript:again()" id = "newgame">重新开始</a></div>
 			</div>
 		</div>
