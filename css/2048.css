@@ -24,6 +24,8 @@ header p{
 }
 
 header #newgame{
+	position: relative;
+	z-index: 9999999999;
 	text-decoration:none;
 	color:white;
 	background-color:#C5B883;
