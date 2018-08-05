@@ -2,11 +2,10 @@ var board = new Array();
 var score = 0;
 var hasConflicted = new Array();
 var winOnce = false;
-
-// 计时器
-var timer;
-// 时间
-var t = 0;
+var loader = new createjs.LoadQueue(true);
+var soundReady = false;
+var soundFirstPlay = true;
+var sounds = {lose:null,lose:null,win:null};
 
 $().ready(function(){
 
@@ -14,20 +13,36 @@ $().ready(function(){
 	prepareForMobile();
 	newgame();
 	hideDialog();
-
-
-	// 计时开始
-	// starTimer();
+	
+	loader.installPlugin(createjs.Sound);
+	loader.loadFile({ src: 'assets/lose.mp3', id: 'lose', type:createjs.AbstractLoader.SOUND });
+	loader.loadFile({ src: 'assets/move.mp3', id: 'move', type:createjs.AbstractLoader.SOUND });
+	loader.loadFile({ src: 'assets/win.mp3', id: 'win', type:createjs.AbstractLoader.SOUND });
+	loader.addEventListener( 'complete', onLoadComplete );
+	
+	
 });
+
+function onLoadComplete(){
+	soundReady = true;
+}
+
+function playSound(id){
+	if(soundReady){ 
+		if(!sounds[id]) sounds[id] = createjs.Sound.play(id);
+		else sounds[id].play();
+	}
+}
 
 function registerTouch(){
 
 	$('#shell').on('touchstart',function(event){
-		// startx = event.touches[0].pageX;
-		// console.log(event)
+		if(soundFirstPlay){
+			playSound('move');
+			soundFirstPlay=false;
+		}
 		startx = event.originalEvent.touches[0].pageX;
 		starty = event.originalEvent.touches[0].pageY;
-		// starty = event.touches[0].pageY;
 	});
 
 	$('#shell').on('touchmove',function(event){
@@ -56,6 +71,7 @@ function registerTouch(){
 			if(deltax > 0){
 				//向右
 				if(moveRight()){
+						playSound('move');
 						setTimeout("generateOneNumber()",210);
 						setTimeout("isGameover()",300);
 						setTimeout("isWin()",300);
@@ -63,6 +79,7 @@ function registerTouch(){
 			}else{
 				//向左
 				if(moveLeft()){
+						playSound('move');
 						setTimeout("generateOneNumber()",210);
 						setTimeout("isGameover()",300);
 						setTimeout("isWin()",300);
@@ -72,6 +89,7 @@ function registerTouch(){
 			if(deltay > 0){
 				//向下
 				if(moveDown()){
+						playSound('move');
 						setTimeout("generateOneNumber()",210);
 						setTimeout("isGameover()",300);
 						setTimeout("isWin()",300);
@@ -79,6 +97,7 @@ function registerTouch(){
 			}else{
 				//向上
 				if(moveUp()){
+						playSound('move');
 						setTimeout("generateOneNumber()",210);
 						setTimeout("isGameover()",300);
 						setTimeout("isWin()",300);
@@ -104,6 +123,7 @@ function prepareForMobile(){
 	$("#grid-container").css('border-radius',0.02*gridContainerWidth);
 	$("#grid-container").css('transform','translate(-50%, -50%) scale('+1.0+')');
 
+
 	$(".grid-cell").css("width",cellSideLength);
 	$(".grid-cell").css("height",cellSideLength);
 	$(".grid-cell").css("border-radius",0.02*cellSideLength);
@@ -111,10 +131,6 @@ function prepareForMobile(){
 }
 
 function newgame(){
-	// 先清除已有计时器
-	endTimer()
-	// 开始计时
-	starTimer()
 	//初始化棋盘
 	init();
 	//随机生成两个数字
@@ -122,51 +138,17 @@ function newgame(){
 	generateOneNumber();
 	updateBoardView();
 	resetSocre();
-
-}
-
-// 计时开始
-function starTimer() {
-	t = 0 
-	timer = setInterval(() => {
-		t++;
-		renderTime();
-	}, 1000)
-	function renderTime() {
-		var str = ''
-		
-		if (t < 60 ) {
-			str = '00:' + (t > 9 ? t : '0' + t)
-		} else if (t >= 60 && t < 60 * 60) {
-			var min = Math.floor(t / 60) > 9 ? Math.floor(t / 60) : '0' + Math.floor(t / 60)
-			var sec = t % 60 > 9 ? t % 60 : '0' + t % 60
-			str = min + ':' + sec
-		} else if(t > 60 * 60){
-			str = '真的大便'
-			clearInterval(timer)
-		}
-
-		$('#time').text(str)
-	}
-}
-
-// 计时结束
-function endTimer(params) {
-	timer && clearInterval(timer)
+	
 }
 
 function again(){
 	newgame();
 	hideDialog();
 	resetSocre();
-
-	// starTimer();
 }
 
 function conti(){
 	hideDialog();
-
-	endTimer()
 }
 
 function init(){
@@ -313,15 +295,15 @@ function isWin(){
 function win(){
 	$(".dialog-success").css("display","block");
 	$("#shell").css("display","none");
-
-	endTimer()
+	
+	playSound('win');
 }
 
 function gameover(){
 	$(".dialog-fail").css("display","block");
 	$("#shell").css("display","none");
-
-	endTimer()
+	
+	playSound('lose');
 }
 
 function moveUp(){
@@ -356,6 +338,7 @@ function moveUp(){
 		}
 	}
 	setTimeout("updateBoardView()",200);
+
 	return true;
 }
 
@@ -391,6 +374,7 @@ function moveDown(){
 		}
 	}
 	setTimeout("updateBoardView()",200);
+
 	return true;
 }
 
@@ -426,6 +410,7 @@ function moveRight(){
 		}
 	}
 	setTimeout("updateBoardView()",200);
+
 	return true;
 }
 
@@ -461,6 +446,7 @@ function moveLeft(){
 		}
 	}
 	setTimeout("updateBoardView()",200);
+
 	return true;
 }
 
